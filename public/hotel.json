@@ -1,0 +1,145 @@
+[
+    {
+        "languagesApplied": [
+            "en",
+            "fr"
+        ],
+        "chainName": "Hilton Hotels & Resorts",
+        "hotelId": 1,
+        "hotelName": "Hilton London Bankside",
+        "hotelCode": "HLB",
+        "brand": "Hilton",
+        "address": "2-8 Great Suffolk Street",
+        "country": "United Kingdom",
+        "city": "London",
+        "categoryIds": [],
+        "amenityIds": [],
+        "stars": 5,
+        "hotelProfileAssets": [
+            {
+                "languageCode": "en",
+                "shortHotelName": "sample short hotel name to be replaced",
+                "finalUrl": "sample final url to be replaced",
+                "pinModeDescriptionPairs": [
+                    {
+                        "id": 1,
+                        "content": "sample description 1"
+                    },
+                    {
+                        "id": 2,
+                        "content": "sample description 2 (to be replaced)"
+                    }
+                ],
+                "callouts": [
+                    "sample callout1",
+                    " sample callout 2(to be replaced)"
+                ],
+                "sitelinks": [
+                    {
+                        "title": "sample sitelink title",
+                        "finalUrl": "sample sitelink final url ",
+                        "description1": "sample sitelink description 1",
+                        "description2": "sample sitelink description 2",
+                        "position": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "languagesApplied": [],
+        "chainName": "Marriott International",
+        "hotelId": 2,
+        "hotelName": "Marriott Marquis Dubai",
+        "hotelCode": "MMD",
+        "brand": "Marriott Hotels & Resorts",
+        "address": "Sheikh Zayed Road",
+        "country": "United Arab Emirates",
+        "city": "Dubai",
+        "categoryIds": [],
+        "amenityIds": [],
+        "stars": 5,
+        "hotelProfileAssets": [
+            {
+                "languageCode": "en",
+                "shortHotelName": null,
+                "finalUrl": null,
+                "pinModeDescriptionPairs": [],
+                "callouts": [],
+                "sitelinks": []
+            }
+        ]
+    },
+    {
+        "languagesApplied": [],
+        "chainName": "Accor",
+        "hotelId": 3,
+        "hotelName": "Novotel Paris Centre Tour Eiffel",
+        "hotelCode": "NPCTE",
+        "brand": "Novotel",
+        "address": "61 Quai de Grenelle",
+        "country": "France",
+        "city": "Paris",
+        "categoryIds": [],
+        "amenityIds": [],
+        "stars": 4,
+        "hotelProfileAssets": [
+            {
+                "languageCode": "en",
+                "shortHotelName": null,
+                "finalUrl": null,
+                "pinModeDescriptionPairs": [],
+                "callouts": [],
+                "sitelinks": []
+            }
+        ]
+    },
+    {
+        "languagesApplied": [],
+        "chainName": "InterContinental Hotels Group (IHG)",
+        "hotelId": 4,
+        "hotelName": "Holiday Inn Express Times Square South",
+        "hotelCode": "HIETS",
+        "brand": "Holiday Inn",
+        "address": "60 W 36th St",
+        "country": "United States",
+        "city": "New York City",
+        "categoryIds": [],
+        "amenityIds": [],
+        "stars": 3,
+        "hotelProfileAssets": [
+            {
+                "languageCode": "en",
+                "shortHotelName": null,
+                "finalUrl": null,
+                "pinModeDescriptionPairs": [],
+                "callouts": [],
+                "sitelinks": []
+            }
+        ]
+    },
+    {
+        "languagesApplied": [],
+        "chainName": "Radisson Hotel Group",
+        "hotelId": 5,
+        "hotelName": "Radisson Blu Royal Hotel",
+        "hotelCode": "RBRHC",
+        "brand": "Radisson Blu",
+        "address": "Hammerichsgade 1",
+        "country": "Denmark",
+        "city": "Copenhagen",
+        "categoryIds": [],
+        "amenityIds": [],
+        "stars": 4,
+        "hotelProfileAssets": [
+            {
+                "languageCode": "en",
+                "shortHotelName": null,
+                "finalUrl": null,
+                "pinModeDescriptionPairs": [],
+                "callouts": [],
+                "sitelinks": []
+            }
+        ]
+    }
+]

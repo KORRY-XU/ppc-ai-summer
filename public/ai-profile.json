@@ -1,0 +1,27 @@
+{
+    "shortHotelName": "suggestedHotelName",
+    "descriptions": [
+        "description1.....",
+        "description2 ....."
+    ],
+    "callouts": [
+        "callout1",
+        "callout2",
+        "callout3",
+        "callout4"
+    ],
+    "siteLinks": [
+        {
+            "title": "t1",
+            "finalUrl": "fu1",
+            "description1": "description1 of sitelink1",
+            "description2": "description2 of sitelink1"
+        },
+        {
+            "title": "t2",
+            "finalUrl": "fu2",
+            "description1": "description1 of sitelink2",
+            "description2": "description2 of sitelink2"
+        }
+    ]
+}
