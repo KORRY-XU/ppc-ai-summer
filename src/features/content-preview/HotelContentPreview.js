@@ -18,6 +18,17 @@ const extraInfoContents = {
         "Business tycoons gather",
     ],
     preferential: ["Certificate holders enjoy a 20% discount"],
+    sitelinkSpecifications: [
+        {
+            id: 1,
+            content: "beauty of the nature",
+        },
+        {
+            id: 2,
+            content:
+                "https://www.ihg.com/crowneplaza/hotels/us/en/new-york/nycpc/hoteldetail/dining",
+        },
+    ],
     requestCount: 1,
 };
 const hotelProfileInfo = {
@@ -140,14 +151,14 @@ function HotelContentPreview() {
                             <b>Hotel Callouts:</b>
                         </div>
                         <br />
-                        <CalloutPreview />
+                        <CalloutPreview profile={profile}/>
                     </Content>
                 </Layout>
                 <ProCard title="Sitelink Preview">
-                    <SitelinkPreview />
+                    <SitelinkPreview profile={profile}/>
                 </ProCard>
                 <ProCard style={{ float: "right" }}>
-                    <HotelFooter />
+                    <HotelFooter profile={profile}/>
                 </ProCard>
             </ProCard>
         </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Input } from "antd";
 
 function HotelInfo({profile}) {
+  const {descriptions} = profile;
     return (
         <div
             style={{
@@ -18,11 +19,11 @@ function HotelInfo({profile}) {
             <div>
               <div>Hotel Descriptions:</div>
               <div>
-                <Input placeholder="description 1" value={profile.descriptions[0]} />
+                <Input placeholder="description 1" value={descriptions?.length > 0 ? descriptions[0] : ''} />
               </div>
                 <br />
               <div>
-                <Input placeholder="description 2" value={profile.descriptions[1]} />
+                <Input placeholder="description 2" value={descriptions?.length > 1 ? descriptions[1] : ''} />
               </div>
 
             </div>

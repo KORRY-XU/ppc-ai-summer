@@ -1,7 +1,16 @@
 import React from "react";
 import { Button, Space } from "antd";
+import { useNavigate } from "react-router-dom";
 
-function HotelFooter() {
+function HotelFooter({ profile }) {
+    const navigate = useNavigate();
+
+    const goToHotel = () => {
+        navigate("/hotel", {
+            replace: false,
+            state: profile,
+        });
+    }
     return (
         <div
             style={{

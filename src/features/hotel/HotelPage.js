@@ -82,7 +82,8 @@ const extraInfoC = {
         "International Business Forum Conference",
         "Business tycoons gather",
     ],
-    preferential: ["Certificate holders enjoy a 20% discount"],
+    preferential: ["Certificate holders enjoy a 20% discount..."],
+    holidays: [""],
     sitelinkSpecifications: [
         {
             id: 1,
@@ -103,6 +104,7 @@ const HotelPage = () => {
     const filteredOptions = OPTIONS.filter((o) => !selectedItems.includes(o));
     const [optionVisit, setOptionVisit] = useState(false);
     const [modalVisit, setModalVisit] = useState(false);
+    const [reqCount, setReqCount] = useState(1);
     const navigate = useNavigate();
     const HOTEL_URL = "/service-ai/hotels/";
     const { hotelId } = useParams();
@@ -130,7 +132,7 @@ const HotelPage = () => {
         console.log("extra info: " + extraInfoContents);
         console.log("hotel info: " + hotelProfileInfo);
         let sessionTokenTmp;
-        if (token != "" && token != undefined) {
+        if (token !== "" && token !== undefined) {
             sessionTokenTmp = token;
         }
         let requestParam = {
@@ -141,11 +143,41 @@ const HotelPage = () => {
             },
         };
         const url = "/service-ai/ai-tool/content/hotel-profile";
+        console.log('request param: ' + requestParam);
         axios.post(url, requestParam).then(
             (rsp) => {
                 console.log("收到 Data: ", rsp.data);
                 // 跳转到profile页面（带参数）
-                manualRouteWithState("profile", rsp.data);
+                manualRouteWithState("/profile", rsp.data);
+            },
+            (error) => {
+                console.log("获取hotel suggestion 异常: ", error);
+                setToken("");
+            }
+        );
+    };
+    const getHotelTranslation = (request) => {
+        var { extraInfoContents, hotelProfileInfo } = request;
+        console.log("extra info: " + extraInfoContents);
+        console.log("hotel info: " + hotelProfileInfo);
+        let sessionTokenTmp;
+        if (token !== "" && token !== undefined) {
+            sessionTokenTmp = token;
+        }
+        let requestParam = {
+            ...request,
+            extraInfoContents: {
+                ...extraInfoContents,
+                sessionToken: sessionTokenTmp,
+            },
+        };
+        const url = "/service-ai/ai-tool/content/hotel-profile";
+        console.log('request param: ' + requestParam);
+        axios.post(url, requestParam).then(
+            (rsp) => {
+                console.log("收到 Data: ", rsp.data);
+                // 跳转到profile页面（带参数）
+                manualRouteWithState("/trans", rsp.data);
             },
             (error) => {
                 console.log("获取hotel suggestion 异常: ", error);
@@ -165,6 +197,14 @@ const HotelPage = () => {
     const hotel = useSelector((state) =>
         selectHotelById(state, Number(hotelId))
     );
+
+    useEffect(() => {
+        let ignore = false;
+        setHotelProfileInfo(hotel ? hotel : hotelProfileInfoC);
+        return () => {
+            ignore = true;
+        };
+    }, []);
 
     if (!hotel) {
         return (
@@ -230,13 +270,17 @@ const HotelPage = () => {
         console.log("Change:", e.target.value);
     };
     const onOptionChange = (e) => {
-        if(e === 'content') {
-            // show content suggestion float page. 
+        if (e === "content") {
+            // show content suggestion float page.
             console.log("Content Change:", e);
             setOptionVisit(false);
             setModalVisit(true);
-        }else if(e === 'translation') {
+        } else if (e === "translation") {
             // go to translation page.
+            getHotelTranslation({
+                ...{ extraInfoContents: extraInfo },
+                ...{ hotelProfileInfo: hotelProfileInfo },
+            });
             console.log("Translation Change:", e);
         }
     };
@@ -368,16 +412,66 @@ const HotelPage = () => {
                 onOpenChange={setModalVisit}
             >
                 <div>Topic & Events</div>
-                <Input style={{ width: "355px" }} /> <br />
-                <Input style={{ width: "355px" }} />
+                <Input
+                    style={{ width: "355px" }}
+                    value={extraInfo.topicsAndEvents[0]}
+                    onChange={(value) => {
+                        const te = [...extraInfo.topicsAndEvents];
+                        te[0] = value;
+                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                    }}
+                />{" "}
                 <br />
-                <Input style={{ width: "355px" }} />
+                <Input
+                    style={{ width: "355px" }}
+                    value={extraInfo.topicsAndEvents[1]}
+                    onChange={(value) => {
+                        const te = [...extraInfo.topicsAndEvents];
+                        te[1] = value;
+                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                    }}
+                />
                 <br />
-                <Input style={{ width: "355px" }} />
+                <Input
+                    style={{ width: "355px" }}
+                    value={extraInfo.topicsAndEvents[2]}
+                    onChange={(value) => {
+                        const te = [...extraInfo.topicsAndEvents];
+                        te[2] = value;
+                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                    }}
+                />
+                <br />
+                <Input
+                    style={{ width: "355px" }}
+                    value={extraInfo.topicsAndEvents[3]}
+                    onChange={(value) => {
+                        const te = [...extraInfo.topicsAndEvents];
+                        te[3] = value;
+                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                    }}
+                />
                 <br />
                 <div>Preferentials</div>
-                <Input style={{ width: "355px" }} /> <br />
-                <Input style={{ width: "355px" }} />
+                <Input
+                    style={{ width: "355px" }}
+                    value={extraInfo.preferential[0]}
+                    onChange={(value) => {
+                        const te = [...extraInfo.preferential];
+                        te[0] = value;
+                        setExtraInfo({...extraInfo, preferential: te});
+                    }}
+                />{" "}
+                <br />
+                <Input
+                    style={{ width: "355px" }}
+                    value={extraInfo.preferential[1]}
+                    onChange={(value) => {
+                        const te = [...extraInfo.preferential];
+                        te[1] = value;
+                        setExtraInfo({...extraInfo, preferential: te});
+                    }}
+                />
                 <br />
                 <div>Holidays</div>
                 <Select
@@ -387,6 +481,7 @@ const HotelPage = () => {
                     value={selectedItems}
                     onChange={(value) => {
                         setSelectedItems(value);
+                        setExtraInfo({...extraInfo, holiday: value});
                         console.log("current select value: " + value);
                     }}
                     style={{
@@ -401,47 +496,149 @@ const HotelPage = () => {
                     <br />
                 </div>
                 <div>Sitelink Specifications</div>
-                <Input style={{ width: "355px" }} />{" "}
-                <Select
-                    showSearch
-                    placeholder="Specified Type"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onSearch={onSearch}
-                    filterOption={filterOption}
-                    options={[
-                        {
-                            value: "1", // content
-                            label: "Title Specify",
-                        },
-                        {
-                            value: "2", // url
-                            label: "Final URL Specify",
-                        },
-                    ]}
-                    style={{ width: "200px" }}
-                />
+                <div>
+                    <Input
+                        style={{ width: "500px" }}
+                        value={
+                            extraInfo.sitelinkSpecifications.length >= 1
+                                ? extraInfo.sitelinkSpecifications[0].content
+                                : ""
+                        }
+                        onChange={(value) => {
+                            const sls = [...extraInfo.sitelinkSpecifications];
+                            sls[0] = {id: "1", content: value}
+                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                        }}
+                    />
+                    <Select
+                        showSearch
+                        placeholder="Specified Type"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        onSearch={onSearch}
+                       defaultValue={"1"}
+                        filterOption={filterOption}
+                        options={[
+                            {
+                                value: "1", // content
+                                label: "Title Specify",
+                            },
+                            {
+                                value: "2", // url
+                                label: "Final URL Specify",
+                            },
+                        ]}
+                        style={{ width: "200px", float: "right" }}
+                    />
+                </div>
                 <br />
-                <Input style={{ width: "355px" }} />
-                <Select
-                    showSearch
-                    placeholder="Specified Type"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onSearch={onSearch}
-                    filterOption={filterOption}
-                    options={[
-                        {
-                            value: "1", // content
-                            label: "Title Specify",
-                        },
-                        {
-                            value: "2", // url
-                            label: "Final URL Specify",
-                        },
-                    ]}
-                    style={{ width: "200px" }}
-                />
+                <div>
+                    <Input
+                        style={{ width: "500px" }}
+                        value={
+                            extraInfo.sitelinkSpecifications.length >= 2
+                                ? extraInfo.sitelinkSpecifications[1].content
+                                : ""
+                        }
+                        onChange={(value) => {
+                            const sls = [...extraInfo.sitelinkSpecifications];
+                            sls[1] = {id: "1", content: value}
+                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                        }}
+                    />
+                    <Select
+                        showSearch
+                        placeholder="Specified Type"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        onSearch={onSearch}
+                        defaultValue={"1"}
+                        filterOption={filterOption}
+                        options={[
+                            {
+                                value: "1", // content
+                                label: "Title Specify",
+                            },
+                            {
+                                value: "2", // url
+                                label: "Final URL Specify",
+                            },
+                        ]}
+                        style={{ width: "200px", float: "right" }}
+                    />
+                </div>
+                <br />
+                <div>
+                    <Input
+                        style={{ width: "500px" }}
+                        value={
+                            extraInfo.sitelinkSpecifications.length >= 3
+                                ? extraInfo.sitelinkSpecifications[2].content
+                                : ""
+                        }
+                        onChange={(value) => {
+                            const sls = [...extraInfo.sitelinkSpecifications];
+                            sls[2] = {id: "2", content: value}
+                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                        }}
+                    />
+                    <Select
+                        showSearch
+                        placeholder="Specified Type"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        onSearch={onSearch}
+                        defaultValue={"2"}
+                        filterOption={filterOption}
+                        options={[
+                            {
+                                value: "1", // content
+                                label: "Title Specify",
+                            },
+                            {
+                                value: "2", // url
+                                label: "Final URL Specify",
+                            },
+                        ]}
+                        style={{ width: "200px", float: "right" }}
+                    />
+                </div>
+                <br />
+                <div>
+                    <Input
+                        style={{ width: "500px" }}
+                        value={
+                            extraInfo.sitelinkSpecifications.length >= 4
+                                ? extraInfo.sitelinkSpecifications[3].content
+                                : ""
+                        }
+                        onChange={(value) => {
+                            const sls = [...extraInfo.sitelinkSpecifications];
+                            sls[3] = {id: "2", content: value}
+                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                        }}
+                    />
+                    <Select
+                        showSearch
+                        placeholder="Specified Type"
+                        optionFilterProp="children"
+                        onChange={onChange}
+                        onSearch={onSearch}
+                        defaultValue={"2"}
+                        filterOption={filterOption}
+                        options={[
+                            {
+                                value: "1", // content
+                                label: "Title Specify",
+                            },
+                            {
+                                value: "2", // url
+                                label: "Final URL Specify",
+                            },
+                        ]}
+                        style={{ width: "200px", float: "right" }}
+                    />
+                </div>
                 <br />
             </ModalForm>
             <ModalForm
@@ -454,7 +651,9 @@ const HotelPage = () => {
                 onOpenChange={setOptionVisit}
                 submitter={false}
             >
-            <div><br/> <br/></div>
+                <div>
+                    <br /> <br />
+                </div>
                 <Select
                     placeholder="I want to..."
                     onChange={onOptionChange}
@@ -470,7 +669,9 @@ const HotelPage = () => {
                     ]}
                     style={{ width: "500px" }}
                 />
-                <div><br/> <br/></div>
+                <div>
+                    <br /> <br />
+                </div>
                 <br />
             </ModalForm>
         </>
