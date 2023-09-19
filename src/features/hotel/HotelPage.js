@@ -74,6 +74,37 @@ const hotelProfileInfoC = {
         "24-hour front desk and room service",
         "On-site parking or valet parking",
     ],
+    "stars": 5,
+    "hotelProfileAssets": [
+        {
+            "languageCode": "en",
+            "shortHotelName": "sample short hotel name to be replaced",
+            "finalUrl": "sample final url to be replaced",
+            "pinModeDescriptionPairs": [
+                {
+                    "id": 1,
+                    "content": "sample description 1"
+                },
+                {
+                    "id": 2,
+                    "content": "sample description 2 (to be replaced)"
+                }
+            ],
+            "callouts": [
+                "sample callout1",
+                " sample callout 2(to be replaced)"
+            ],
+            "sitelinks": [
+                {
+                    "title": "sample sitelink title",
+                    "finalUrl": "sample sitelink final url ",
+                    "description1": "sample sitelink description 1",
+                    "description2": "sample sitelink description 2",
+                    "position": 1
+                }
+            ]
+        }
+    ]
 };
 
 const extraInfoC = {
