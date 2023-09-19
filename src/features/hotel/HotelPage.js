@@ -143,7 +143,7 @@ const HotelPage = () => {
             },
         };
         const url = "/service-ai/ai-tool/content/hotel-profile";
-        console.log('request param: ' + requestParam);
+        console.log("request param: " + requestParam);
         axios.post(url, requestParam).then(
             (rsp) => {
                 console.log("收到 Data: ", rsp.data);
@@ -172,7 +172,7 @@ const HotelPage = () => {
             },
         };
         const url = "/service-ai/ai-tool/content/hotel-profile";
-        console.log('request param: ' + requestParam);
+        console.log("request param: " + requestParam);
         axios.post(url, requestParam).then(
             (rsp) => {
                 console.log("收到 Data: ", rsp.data);
@@ -417,8 +417,8 @@ const HotelPage = () => {
                     value={extraInfo.topicsAndEvents[0]}
                     onChange={(value) => {
                         const te = [...extraInfo.topicsAndEvents];
-                        te[0] = value;
-                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                        te[0] = value.target.value;
+                        setExtraInfo({ ...extraInfo, topicsAndEvents: te });
                     }}
                 />{" "}
                 <br />
@@ -427,8 +427,8 @@ const HotelPage = () => {
                     value={extraInfo.topicsAndEvents[1]}
                     onChange={(value) => {
                         const te = [...extraInfo.topicsAndEvents];
-                        te[1] = value;
-                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                        te[1] = value.target.value;
+                        setExtraInfo({ ...extraInfo, topicsAndEvents: te });
                     }}
                 />
                 <br />
@@ -436,9 +436,10 @@ const HotelPage = () => {
                     style={{ width: "355px" }}
                     value={extraInfo.topicsAndEvents[2]}
                     onChange={(value) => {
+                        console.log('input value:' + value.target.value)
                         const te = [...extraInfo.topicsAndEvents];
-                        te[2] = value;
-                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                        te[2] = value.target.value;
+                        setExtraInfo({ ...extraInfo, topicsAndEvents: te });
                     }}
                 />
                 <br />
@@ -447,8 +448,8 @@ const HotelPage = () => {
                     value={extraInfo.topicsAndEvents[3]}
                     onChange={(value) => {
                         const te = [...extraInfo.topicsAndEvents];
-                        te[3] = value;
-                        setExtraInfo({...extraInfo, topicsAndEvents: te});
+                        te[3] = value.target.value;
+                        setExtraInfo({ ...extraInfo, topicsAndEvents: te });
                     }}
                 />
                 <br />
@@ -458,8 +459,8 @@ const HotelPage = () => {
                     value={extraInfo.preferential[0]}
                     onChange={(value) => {
                         const te = [...extraInfo.preferential];
-                        te[0] = value;
-                        setExtraInfo({...extraInfo, preferential: te});
+                        te[0] = value.target.value;
+                        setExtraInfo({ ...extraInfo, preferential: te });
                     }}
                 />{" "}
                 <br />
@@ -468,8 +469,8 @@ const HotelPage = () => {
                     value={extraInfo.preferential[1]}
                     onChange={(value) => {
                         const te = [...extraInfo.preferential];
-                        te[1] = value;
-                        setExtraInfo({...extraInfo, preferential: te});
+                        te[1] = value.target.value;
+                        setExtraInfo({ ...extraInfo, preferential: te });
                     }}
                 />
                 <br />
@@ -481,7 +482,7 @@ const HotelPage = () => {
                     value={selectedItems}
                     onChange={(value) => {
                         setSelectedItems(value);
-                        setExtraInfo({...extraInfo, holiday: value});
+                        setExtraInfo({ ...extraInfo, holiday: value });
                         console.log("current select value: " + value);
                     }}
                     style={{
@@ -506,8 +507,12 @@ const HotelPage = () => {
                         }
                         onChange={(value) => {
                             const sls = [...extraInfo.sitelinkSpecifications];
-                            sls[0] = {id: "1", content: value}
-                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                            var [a, b, c, d] = sls;
+                            a = {...a, content: value.target.value};
+                            setExtraInfo({
+                                ...extraInfo,
+                                sitelinkSpecifications: [a,b, c,d],
+                            });
                         }}
                     />
                     <Select
@@ -516,7 +521,7 @@ const HotelPage = () => {
                         optionFilterProp="children"
                         onChange={onChange}
                         onSearch={onSearch}
-                       defaultValue={"1"}
+                        defaultValue={"1"}
                         filterOption={filterOption}
                         options={[
                             {
@@ -542,8 +547,12 @@ const HotelPage = () => {
                         }
                         onChange={(value) => {
                             const sls = [...extraInfo.sitelinkSpecifications];
-                            sls[1] = {id: "1", content: value}
-                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                            var [a, b, c, d] = sls;
+                            b = {...b, content: value.target.value};
+                            setExtraInfo({
+                                ...extraInfo,
+                                sitelinkSpecifications: [a,b, c,d],
+                            });
                         }}
                     />
                     <Select
@@ -578,8 +587,12 @@ const HotelPage = () => {
                         }
                         onChange={(value) => {
                             const sls = [...extraInfo.sitelinkSpecifications];
-                            sls[2] = {id: "2", content: value}
-                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                            var [a, b, c, d] = sls;
+                            c = {...c, content: value.target.value};
+                            setExtraInfo({
+                                ...extraInfo,
+                                sitelinkSpecifications: [a,b, c,d],
+                            });
                         }}
                     />
                     <Select
@@ -614,8 +627,12 @@ const HotelPage = () => {
                         }
                         onChange={(value) => {
                             const sls = [...extraInfo.sitelinkSpecifications];
-                            sls[3] = {id: "2", content: value}
-                            setExtraInfo({...extraInfo, sitelinkSpecifications: sls})
+                            var [a, b, c, d] = sls;
+                            d = {...d, content: value.target.value};
+                            setExtraInfo({
+                                ...extraInfo,
+                                sitelinkSpecifications: [a,b, c,d],
+                            });
                         }}
                     />
                     <Select

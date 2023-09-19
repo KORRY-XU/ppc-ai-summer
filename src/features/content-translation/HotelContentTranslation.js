@@ -3,7 +3,8 @@ import { ProCard } from "@ant-design/pro-components";
 import RcResizeObserver from "rc-resize-observer";
 import { useState } from "react";
 import { Button, Space, Input, Select } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+
 import axios from "axios";
 
 const onSearch = (value) => {
@@ -90,9 +91,11 @@ function HotelContentTranslation() {
     const { state } = useLocation();
     const [responsive, setResponsive] = useState(false);
     const [originHotel, setOriginHotel] = useState(hotelProfilePreviewC);
-    const [transHotel, setTransHotel] = useState(transHotelProfileLang);
+    const [transHotel, setTransHotel] = useState({});
+    const navigate = useNavigate();
     useEffect(() => {
         let ignore = false;
+        console.log('route state:' + state)
         if (state) {
             setOriginHotel(state);
         }
@@ -170,6 +173,19 @@ function HotelContentTranslation() {
             );
         }
     };
+
+    const goToHotel = () => {
+        navigate("/hotel/1", {
+            replace: false,
+            state: transHotel,
+        });
+    }
+    const goToHotelList = () => {
+        navigate("/hotel", {
+            replace: false,
+            state: {},
+        });
+    }
     return (
         <>
             {" "}
@@ -205,7 +221,7 @@ function HotelContentTranslation() {
                                 placeholder="Description1"
                                 style={{ width: "400px" }}
                                 value={
-                                    originHotel.descriptions.length > 0
+                                    originHotel.descriptions?.length > 0
                                         ? originHotel.descriptions[0]
                                         : ""
                                 }
@@ -217,7 +233,7 @@ function HotelContentTranslation() {
                                 placeholder="Description2"
                                 style={{ width: "400px" }}
                                 value={
-                                    originHotel.descriptions.length > 1
+                                    originHotel.descriptions?.length > 1
                                         ? originHotel.descriptions[1]
                                         : ""
                                 }
@@ -322,7 +338,7 @@ function HotelContentTranslation() {
                                 placeholder="Description1"
                                 style={{ width: "400px" }}
                                 value={
-                                    transHotel.descriptions.length > 0
+                                    transHotel.descriptions?.length > 0
                                         ? transHotel.descriptions[0]
                                         : ""
                                 }
@@ -334,7 +350,7 @@ function HotelContentTranslation() {
                                 placeholder="Description2"
                                 style={{ width: "400px" }}
                                 value={
-                                    transHotel.descriptions.length > 1
+                                    transHotel.descriptions?.length > 1
                                         ? transHotel.descriptions[1]
                                         : ""
                                 }
@@ -422,7 +438,7 @@ function HotelContentTranslation() {
                         Discard
                     </Button>
                     <Button
-                        onClick={() => console.log("Submit button.")}
+                        onClick={() => {goToHotel()}}
                         type="primary"
                     >
                         That's it!

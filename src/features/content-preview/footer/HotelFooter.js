@@ -6,9 +6,15 @@ function HotelFooter({ profile }) {
     const navigate = useNavigate();
 
     const goToHotel = () => {
-        navigate("/hotel", {
+        navigate("/hotel/1", {
             replace: false,
             state: profile,
+        });
+    }
+    const goToHotelList = () => {
+        navigate("/hotel", {
+            replace: false,
+            state: {},
         });
     }
     return (
@@ -24,10 +30,10 @@ function HotelFooter({ profile }) {
                 <Button onClick={console.log("Retry button.")}>
                     Retry({0})
                 </Button>
-                <Button onClick={console.log("Discard button.")} type="dashed">
+                <Button onClick={goToHotelList()} type="dashed">
                     Discard
                 </Button>
-                <Button onClick={console.log("Submit button.")} type="primary">
+                <Button onClick={goToHotel()} type="primary">
                     That's it!
                 </Button>
             </Space>
